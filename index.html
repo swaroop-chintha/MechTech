@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MechTech — On-Demand Home Services | Book Trusted Professionals</title>
+  <meta name="description" content="Book verified service providers for automobile repair, home appliances, electronics, plumbing, and general maintenance. Fast, affordable, and reliable.">
+  <meta property="og:title" content="MechTech — On-Demand Home Services">
+  <meta property="og:description" content="India's trusted marketplace for home services. Book now!">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="main-nav">
+    <a href="#home" class="nav-logo">⚡ MechTech</a>
+    <div class="nav-links" id="nav-links">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#services" data-route="services">Services</a>
+      <a href="#booking" data-route="booking">Book Now</a>
+      <a href="#track" data-route="track">Track</a>
+    </div>
+    <button class="nav-menu-btn" id="nav-toggle" aria-label="Toggle menu">☰</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="app"></main>
+
+  <!-- CHAT WIDGET -->
+  <button class="chat-fab" id="chat-fab" aria-label="Chat with MechTech Assistant">💬</button>
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">
+      <h4>🤖 MechTech Assistant</h4>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-chips" id="chat-chips">
+      <span class="chat-chip" data-msg="Book a service">🔧 Book Service</span>
+      <span class="chat-chip" data-msg="Track my booking">📍 Track Booking</span>
+      <span class="chat-chip" data-msg="Payment options">💰 Payments</span>
+      <span class="chat-chip" data-msg="Pricing info">💵 Pricing</span>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+      <button class="chat-send" id="chat-send" aria-label="Send message">➤</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast-container"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
