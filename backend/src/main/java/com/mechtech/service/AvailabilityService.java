@@ -8,6 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +26,28 @@ public class AvailabilityService {
     public AvailabilityService(StringRedisTemplate redisTemplate, MechanicRepository mechanicRepository) {
         this.redisTemplate = redisTemplate;
         this.mechanicRepository = mechanicRepository;
+    }
+
+    @PostConstruct
+    public void syncAvailabilityToRedis() {
+        try {
+            List<Mechanic> mechanics = mechanicRepository.findAll();
+            int count = 0;
+            for (Mechanic m : mechanics) {
+                if (m.getId() != null) {
+                    redisTemplate.opsForValue().set(
+                            KEY_PREFIX + m.getId(),
+                            String.valueOf(m.isAvailable()),
+                            TTL_SECONDS,
+                            TimeUnit.SECONDS
+                    );
+                    count++;
+                }
+            }
+            logger.info("Synced {} provider availability statuses to Redis", count);
+        } catch (Exception e) {
+            logger.warn("Failed to sync provider availability to Redis on startup: {}", e.getMessage());
+        }
     }
 
     public Boolean getAvailability(Long mechanicId) {
